@@ -18,29 +18,34 @@ function getWeatherUI(location){
    
     if(tempVal[1] < 5){
         temp.textContent = tempVal[0] + '°F';
+    } else if(tempVal[1] >= 5){
+        temp.textContent = (parseInt(tempVal[0])+1) + '°F';
     } else {
-        temp.textContent = parseInt(tempVal[0]) + 1 + '°F';
+        temp.textContent = parseInt(tempVal[0]) + '°F';
     }
     temp.setAttribute("class", "degrees");
 
     const tmpMax = location.tempMax.toString().split('.');
     const tmpMin = location.tempMin.toString().split('.');
 
-    if(tmpMax[1] < 5){
+    if(tmpMax[1] && tmpMax[1] < 5){
         tempMax.textContent = 'H: ' + parseInt(tmpMax[0]);
+    } else if(tmpMax[1] && tmpMax[1] >= 5){
+        tempMax.textContent = 'H: ' + (parseInt(tmpMax[0])+1);
     } else {
-        tempMax.textContent = 'H: ' + parseInt(tmpMax[0])+1;
+        tempMax.textContent = 'H: ' + parseInt(tmpMax[0]);
     }
-
-    if(tmpMin[1] < 5){
+   
+    if(tmpMin[1] && tmpMin[1] < 5){
         tempMin.textContent = 'L: ' + parseInt(tmpMin[0]);
-    } else {
+    } else if(tmpMin[1] && tmpMin[1] >= 5) {
         tempMin.textContent = 'L: ' + (parseInt(tmpMin[0])+1);
+    } else {
+        tempMin.textContent = 'L: ' + (parseInt(tmpMin[0]));
     }
 
-    div2.setAttribute("class","div1");
+    div2.setAttribute("class","div2");
   
-
     icon.src = location.icon;
 
     div1.appendChild(address);
